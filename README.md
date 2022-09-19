@@ -20,3 +20,6 @@ Currently characters can move and open doors
 * Add Fighting Fantasy fighting when player characters meet NPCs
 * Add movement for NPCs
 * Add treasure objects that characters can possess
+
+## Sprites
+Sprites are kindly provided on free license from : https://opengameart.org/content/dungeon-crawl-32x32-tiles
