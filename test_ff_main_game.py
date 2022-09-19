@@ -1,7 +1,7 @@
 import pytest
 import random
 from ff_main_game import FFgame
-from ff_game_objects import GameObj, Character, NPChar, PChar
+from ff_game_objects import GameObj
 
 
 @pytest.fixture
@@ -68,6 +68,15 @@ class TestFFgame:
 
 class TestGameObjects:
     def test_game_obj(self):
-        my_obj = GameObj("chest", [3, 4])
+        my_obj = GameObj("chest", [3, 3])
         assert my_obj.name == "chest"
-        assert my_obj.pos == [3, 4]
+        assert my_obj.pos == [3, 3]
+
+    def test_move(self, my_game, my_character):
+        my_character.move("n", my_game)
+        my_character.move("n", my_game)
+        my_character.move("e", my_game)
+        my_character.move("e", my_game)
+        # Hits wall - no move
+        my_character.move("e", my_game)
+        assert my_character.pos == [9, 13]

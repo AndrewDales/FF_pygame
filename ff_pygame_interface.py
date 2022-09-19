@@ -42,32 +42,15 @@ class GameSprite(Sprite):
         self.rect.center = [SQ_SIZE * x + SQ_SIZE // 2 for x in game_obj.pos]
 
 
-class CharSprite(GameSprite):
-    def __init__(self, char):
-        super().__init__(char)
-        self.char = char
-
-    def __call__(self):
-        self.rect.center = [SQ_SIZE * x + SQ_SIZE // 2 for x in self.char.pos]
-
-
-def setup_char_sprites(char_group):
-    character_sprites = pygame.sprite.Group()
-    for char in char_group.values():
-        char_sprite = GameSprite(char)
-        # Sets pc_sprite as an observer of pc - the sprite __call__ function will be triggered if the pc moves
-        char.attach(char_sprite)
-        character_sprites.add(char_sprite)
-    return character_sprites
-
-
-def setup_sprites(floor_plan):
-    background_sprites = pygame.sprite.Group()
-    for bg_obj in floor_plan:
-        bg_sprite = GameSprite(bg_obj)
-        bg_obj.attach(bg_sprite)
-        background_sprites.add(bg_sprite)
-    return background_sprites
+# Add sprites to a sprite group. Add the sprite as an observer to the underlying
+# game object
+def setup_sprites(game_obj_list):
+    sprite_group = pygame.sprite.Group()
+    for obj in game_obj_list:
+        sprite = GameSprite(obj)
+        obj.attach(sprite)
+        sprite_group.add(sprite)
+    return sprite_group
 
 
 def main():
@@ -86,6 +69,7 @@ def main():
     clock = pygame.time.Clock()
 
     # Game loop - checks for keypress events and runs the appropriate game method
+    # Then redraw all the sprites taking into account any changes
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
