@@ -7,7 +7,10 @@ from ff_game_objects import GameObj, Character, NPChar, PChar
 class FFgame:
     def __init__(self):
         self.pcs: List[Character] = [PChar('Dwarf', pos=[7, 15]), PChar('Knight', pos=[8, 15])]
-        self.npcs: List[Character] = [NPChar(6, 6, 'Goblin', pos=[2, 2]), NPChar(10, 8, 'Dragon', pos=[3, 8])]
+        self.npcs: List[Character] = [NPChar(6, 6, 'Goblin', pos=[2, 2]),
+                                      NPChar(10, 8, 'Dragon', pos=[3, 8]),
+                                      NPChar(9, 16, 'Cyclops', pos=[13, 1]),
+                                      ]
         self.game_objects: List[Character] = self.pcs + self.npcs
         self.pc_cycle = cycle(self.pcs)
         self.current_pc = next(self.pc_cycle)
