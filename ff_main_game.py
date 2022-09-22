@@ -10,6 +10,7 @@ class FFgame:
         self.npcs: List[Character] = [NPChar(6, 6, 'Goblin', pos=[2, 2]),
                                       NPChar(10, 8, 'Dragon', pos=[3, 8]),
                                       NPChar(9, 16, 'Cyclops', pos=[13, 1]),
+                                      NPChar(8, 16, 'Cyclops', pos=[12, 1]),
                                       ]
         self.game_objects: List[Character] = self.pcs + self.npcs
         self.pc_cycle = cycle(self.pcs)
