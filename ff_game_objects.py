@@ -84,7 +84,7 @@ class PChar(Character):
         skill = 6 + randint(1, 6)
         stamina = 12 + randint(1, 6) + randint(1, 6)
         super().__init__(skill, stamina, name, pos)
-        self.color = [255, 0, 0]
+        # self.color = [255, 0, 0]
 
     def open_doors(self, game):
         adj_cells = game.find_adjacent(self.pos)
@@ -104,4 +104,4 @@ class PChar(Character):
 class NPChar(Character):
     def __init__(self, skill, stamina, name, pos=None):
         super().__init__(skill, stamina, name, pos)
-        self.color = [0, 255, 0]
+        # self.color = [0, 255, 0]
