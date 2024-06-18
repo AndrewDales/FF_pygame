@@ -1,3 +1,4 @@
+import random
 from random import randint
 
 
@@ -59,6 +60,7 @@ class Character(GameObj):
         type game: FFGame
         """
         move_vec = self.directions[move_dir]
+        moved = False
         # Add the move_vec to the current position
         new_pos = [sum(coords) for coords in zip(self.pos, move_vec)]
 
@@ -76,7 +78,8 @@ class Character(GameObj):
                 game.toggle_door(new_pos)
             else:
                 self.pos = new_pos
-        return self.pos
+                moved = True
+        return moved
 
 
 class PChar(Character):
@@ -84,7 +87,7 @@ class PChar(Character):
         skill = 6 + randint(1, 6)
         stamina = 12 + randint(1, 6) + randint(1, 6)
         super().__init__(skill, stamina, name, pos)
-        # self.color = [255, 0, 0]
+        self.moves_remaining = 0
 
     def open_doors(self, game):
         adj_cells = game.find_adjacent(self.pos)
@@ -99,6 +102,15 @@ class PChar(Character):
             fp = game.get_floor(cell)
             if fp and fp.name == "O":
                 game.toggle_door(fp.pos)
+
+    def roll_moves(self):
+        self.moves_remaining = randint(1, 6)
+
+    def move(self, move_dir: str, game):
+        if self.moves_remaining:
+            moved = super().move(move_dir, game)
+            if moved:
+                self.moves_remaining -= 1
 
 
 class NPChar(Character):

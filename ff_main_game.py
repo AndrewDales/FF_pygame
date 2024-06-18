@@ -1,3 +1,4 @@
+import random
 from csv import reader
 from itertools import cycle
 from typing import List
@@ -57,6 +58,7 @@ class FFgame:
     # Cycles onto the next player
     def next_player(self):
         self.current_pc = next(self.pc_cycle)
+        self.current_pc.moves_remaining = random.randint(1, 6)
 
     # character interacts with objects in position pos
     def interact(self, character: Character, pos):

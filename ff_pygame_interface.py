@@ -81,6 +81,8 @@ def main():
                 if event.key in move_keys.keys():
                     # Move the current_pc
                     current_pc.move(move_keys[event.key], game)
+                    # Show how many moves remain
+                    print(f"You have {game.current_pc.moves_remaining} moves remaining")
 
                 elif event.key == K_c:
                     current_pc.close_doors(game)
@@ -92,6 +94,9 @@ def main():
                     # Change the current player to the next pc
                     game.next_player()
                     current_pc = game.current_pc
+                    # Show how many moves remain
+                    print(f"{current_pc.name}'s turn")
+                    print(f"You have {current_pc.moves_remaining} moves remaining")
 
                 elif event.key == K_ESCAPE:
                     pygame.quit()
